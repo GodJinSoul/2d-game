@@ -26,6 +26,14 @@ public class GamePanel extends JPanel {
         this.setDoubleBuffered(true);
     }
 
+    public void loop() {
+
+    }
+
+    public void keypress() {
+
+    }
+
     // drawn in the panel
     public void paintComponent(Graphics g) {
         try {
