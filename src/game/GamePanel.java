@@ -17,74 +17,74 @@ public class GamePanel extends JPanel implements Runnable {
     final int SCREENWIDTH = TILESIZE * MAXSCREENCOL; // 768 pixel
     final int SCREENHEIGHT = TILESIZE * MAXSCREENROW; // 576 pixel
 
-    private Thread gameThread; //game thread
-    private volatile boolean running = false; 
-    private final Player player;
+    private Thread gameThread; // game thread
+    private volatile boolean running = false;
     private final KeyHandler keyHandler = new KeyHandler();
+    private final Player player = new Player(this, keyHandler);
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(SCREENWIDTH, SCREENHEIGHT));
         this.setBackground(Color.BLACK);
-        this.setFocusable(true); //to enable keyboard input
+        this.setFocusable(true); // to enable keyboard input
         this.setDoubleBuffered(true);
-        this.requestFocusInWindow(); //to request focus on the window to be able to receive keyboard input
+        this.requestFocusInWindow(); // to request focus on the window to be able to receive keyboard input
         this.addKeyListener(keyHandler);
-        player = new Player(keyHandler);
     }
 
-    public void startGameThread() { //method to start the thread
-        if (gameThread == null || !running) { 
-            gameThread = new Thread(this); //creates a new thread to this class(GamePanel) can trigger run() method inside THIS class
+    public void startGameThread() { // method to start the thread
+        if (gameThread == null || !running) {
+            gameThread = new Thread(this); // creates a new thread to this class(GamePanel) can trigger run() method
+                                           // inside THIS class
             running = true;
-            gameThread.start(); //this triggers the run() method
+            gameThread.start(); // this triggers the run() method
         }
     }
 
-    public void stopGameThread() { //method to stop the thread
-        running = false; 
+    public void stopGameThread() { // method to stop the thread
+        running = false;
         try {
             if (gameThread != null) {
-                gameThread.join(); //this method waits until the game thread is done
+                gameThread.join(); // this method waits until the game thread is done
             }
         } catch (InterruptedException e) {
         }
     }
 
     @Override
-    public void run() { 
+    public void run() {
         try {
             final double fps = 60.0;
-            final double timePerTick = 1000000000 / fps; //sinerch ko lang
+            final double timePerTick = 1000000000 / fps; // sinerch ko lang
             double delta = 0;
-            long lastTime = System.nanoTime(); //angas
-    
-            while (running) { //for capping fps
+            long lastTime = System.nanoTime(); // angas
+
+            while (running) { // for capping fps
                 long now = System.nanoTime();
                 delta += (now - lastTime) / timePerTick;
                 lastTime = now;
-                
+
                 while (delta >= 1) {
-                    update(); //calls update() method below
-                    repaint(); //this method triggers paintComponent()
+                    update(); // calls update() method below
+                    repaint(); // this method triggers paintComponent()
                     delta--;
                 }
             }
         } catch (Exception e) {
-}
+        }
     }
 
     public void update() {
         if (player != null) {
-            player.update(); //updates player's position
+            player.update(); // updates player's position
         }
     }
 
     @Override
     public void paintComponent(Graphics g) {
-        super.paintComponent(g); //this method is necessary for visual glitches(cleaning the panel before fresh draw)
+        super.paintComponent(g); // this method is necessary for visual glitches(cleaning the panel before fresh
+                                 // draw)
         if (player != null) {
-            player.draw(g); //draws the player's character(sprite) in the panel
+            player.draw(g); // draws the player's character(sprite) in the panel
         }
     }
 }
-
