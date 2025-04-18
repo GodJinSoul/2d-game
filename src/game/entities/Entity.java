@@ -4,7 +4,7 @@ public abstract class Entity {
     protected int speed;
     protected int posX;
     protected int posY;
-    protected String defaultAction;
+    protected String action;
 
     Entity() {
 
