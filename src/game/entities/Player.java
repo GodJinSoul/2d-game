@@ -21,8 +21,8 @@ public class Player extends Entity {
     }
 
     public void defaultValues() {
-        posX = 100;
-        posY = 100;
+        posX = (gp.MAXSCREENCOL * gp.TILESIZE) / 2 - (gp.TILESIZE / 2);
+        posY = (gp.MAXSCREENROW * gp.TILESIZE) / 2 - (gp.TILESIZE / 2);
         speed = 4;
         action = "PASTA";
     }
