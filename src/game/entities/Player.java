@@ -4,18 +4,18 @@ import game.input.KeyHandler;
 import game.GamePanel;
 import game.image.ImageHandler;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 public class Player extends Entity {
-    BufferedImage img;
-
     KeyHandler key;
     GamePanel gp;
+
+    BufferedImage img;
 
     public Player(GamePanel gp, KeyHandler key) {
         this.key = key;
         this.gp = gp;
+
         defaultValues();
         setPlayerSprite(defaultAction);
     }
@@ -28,13 +28,14 @@ public class Player extends Entity {
     }
 
     public void update() {
-        setPlayerSprite("PASTA");
         playerMovement();
+        setPlayerSprite("PASTA");
     }
 
     public void setPlayerSprite(String action) {
         switch (action) {
             case "PASTA" -> img = ImageHandler.GetImage(ImageHandler.PASTA);
+
             default -> img = ImageHandler.GetImage(ImageHandler.PASTA);
 
         }
@@ -42,14 +43,21 @@ public class Player extends Entity {
 
     public void playerMovement() {
 
-        if (key.up)
+        if (key.up == true) {
             posY -= speed;
-        if (key.down)
+        }
+
+        if (key.down == true) {
             posY += speed;
-        if (key.left)
+        }
+
+        if (key.left == true) {
             posX -= speed;
-        if (key.right)
+        }
+
+        if (key.right == true) {
             posX += speed;
+        }
     }
 
     public void draw(Graphics g) { // draw method

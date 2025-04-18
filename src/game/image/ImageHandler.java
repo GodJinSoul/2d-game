@@ -4,7 +4,9 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 public class ImageHandler {
-    public static final String PASTA = "pasta.png";
+    // just put the correct relative path to the image
+
+    public static final String PASTA = "res/sprites/pasta.png";
 
     public static BufferedImage GetImage(String filename) {
         BufferedImage img = null;
