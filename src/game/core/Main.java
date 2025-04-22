@@ -16,9 +16,9 @@ public class Main {
         EntityManager entityManager = new EntityManager();
 
         // Create entities using the factory system
-        Entity player = EntityFactorySystem.createPlayer(entityManager, 100, 100, 4, "Josh");
-        EntityFactorySystem.createMob(entityManager, 200, 200, 2);
-        EntityFactorySystem.createMob(entityManager, 300, 300, 3);
+        Entity player = EntityFactorySystem.createPlayer(entityManager, 100, 100, 4, "Josh", "PLAYER_SPRITE_SHEET", 4);
+        EntityFactorySystem.createMob(entityManager, 200, 200, 2, "PLAYER_SPRITE_SHEET", 4);
+        // EntityFactorySystem.createMob(entityManager, 300, 300, 3, "Image", 4);
 
         // Initialize systems
         RenderingSystem rs = new RenderingSystem(entityManager);
