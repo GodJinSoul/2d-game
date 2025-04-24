@@ -1,4 +1,4 @@
-## 2d-game
-cool game (real)
-
-## very nice
+## TODO
+- meow
+- collision
+- objects
